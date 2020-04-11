@@ -1,0 +1,14 @@
+<div class="main-top">
+<h2>投稿したってや</h2>
+<%= form_with(model: Blog.new, local: true, url: confirm_blogs_path) do |form| %>
+    <div>
+        <%= form.label :画像貼ってな %><br>
+        <%= form.file_field :blog_image %>
+    </div><br>
+    <div>
+        <%= form.label :コメントしてな %><br>
+        <%= form.text_field :content %>
+    </div><br>
+    <%= form.submit value="投稿するで" %>
+<% end %>
+</div>

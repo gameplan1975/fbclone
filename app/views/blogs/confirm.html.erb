@@ -1,0 +1,10 @@
+<div class="main-top">
+    <h3>これで、ええのん？</h3>
+    <%= form_with(model: @blog, url: blogs_path, local: true) do |form| %>
+    <%= image_tag(@blog.blog_image.url) if @blog.blog_image && @blog.blog_image.url %>
+    <%= form.hidden_field :image_cache %>
+    <%= form.hidden_field :content %>
+    <p>:<%= @blog.content %></p>
+    <%= form.submit "投稿する" %>
+    <% end %>
+</div>

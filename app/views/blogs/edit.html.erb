@@ -1,0 +1,19 @@
+<div class="main-top">
+    <% if flash[:notice] %>
+      <div class="flash">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+<h2>編集したってや</h2>
+<%= form_with(model: @blog, local: true) do |form| %>
+    <div>
+        <%= form.label :画像貼ってな %><br>
+        <%= form.file_field :blog_image %>
+    </div><br>
+    <div>
+        <%= form.label :コメントしてな %><br>
+        <%= form.text_field :content %>
+    </div><br>
+    <%= form.submit value="編集するわ" %>
+<% end %>
+</div>

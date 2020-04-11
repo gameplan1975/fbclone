@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fakelook</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <header>
+    <div class ="header-logo"><%= link_to("Fakelook","/") %></div>
+    <ul class ="header-menus">
+      <% if logged_in? %>
+        <li><%= current_user.name %></li>
+      <% end %>
+      <li><%= link_to("投稿するで","/blogs/new") %></li>
+      <li><%= link_to("投稿見るで","/blogs") %></li>
+      <% if logged_in? %>
+        <li><%= link_to "自己紹介", user_path(current_user.id) %></li>
+        <li><%= link_to "ログアウト", session_path(current_user.id), method: :delete %></li>
+      <% else %>
+        <li><%= link_to "新規登録", new_user_path %></li>
+        <li><%= link_to "ログイン", new_session_path %></li>
+      <% end %>
+      <li><%= link_to("へるぷ","/homes/help") %></li>
+    </ul>
+  </header>
+      <% if flash[:notice] %>
+      <div class="flash">
+        <br>
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+    <%= yield %>
+  </body>
+</html>

@@ -11,7 +11,7 @@ class BlogsController < ApplicationController
         if params[:back]
             render :new
         else
-            Blog.create(blog_image: params[:blog][:blog_image], content: params[:blog][:content], 
+            Blog.create(blog_image: params[:blog][:blog_image_cash], content: params[:blog][:content], 
             user_id: current_user.id)
             redirect_to new_blog_path
         end

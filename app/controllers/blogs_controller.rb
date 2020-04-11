@@ -13,7 +13,7 @@ class BlogsController < ApplicationController
         else
             Blog.create(blog_image: params[:blog][:blog_image], content: params[:blog][:content], 
             user_id: current_user.id)
-            redirect_to blog_path
+            redirect_to new_blog_path
         end
     end
 
@@ -51,6 +51,6 @@ class BlogsController < ApplicationController
 
     private
     def blog_params
-      params.require(:blog).permit(:blog_image, :content, :image_cache, :user_id, :image)                         
+      params.require(:blog).permit(:blog_image, :content, :image_cache, :user_id, :image, :blog_image_cash)                         
     end
 end

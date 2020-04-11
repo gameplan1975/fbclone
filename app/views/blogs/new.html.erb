@@ -2,8 +2,9 @@
 <h2>投稿したってや</h2>
 <%= form_with(model: Blog.new, local: true, url: confirm_blogs_path) do |form| %>
     <div>
-        <%= form.label :画像貼ってな %><br>
+        <%= image_tag(@blog.blog_image.url) if @blog.blog_image && @blog.blog_image.url %>
         <%= form.file_field :blog_image %>
+        <%= form.hidden_field :blog_image_cache %>
     </div><br>
     <div>
         <%= form.label :コメントしてな %><br>

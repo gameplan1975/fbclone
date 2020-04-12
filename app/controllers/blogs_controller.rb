@@ -6,21 +6,18 @@ class BlogsController < ApplicationController
             @blog = Blog.new
         end
     end
-
     def create
+        @blog = current_user.blogs.build(blog_params)
         if params[:back]
             render :new
         else
-            Blog.create(blog_image: params[:blog][:blog_image_cash], content: params[:blog][:content], 
-            user_id: current_user.id)
-            redirect_to new_blog_path
+        @blog.save
+        redirect_to blogs_path
         end
     end
-
     def index
         @blogs = Blog.all
     end
-
     def update
         @blog = Blog.find(params[:id])
         if @blog.update(blog_params)
@@ -29,28 +26,23 @@ class BlogsController < ApplicationController
             render :edit
         end
     end
-
     def edit
         @blog = Blog.find(params[:id])
     end
-
     def destroy
         @blog = Blog.find(params[:id])
         @blog.destroy
         redirect_to blogs_path, notice:"ブログをほかしたで"
     end
-
     def show
         @blog = Blog.find(params[:id]) 
-        #@user = User.find(id:blog.user_id)
     end
-
     def confirm
-        @blog = Blog.new(blog_params)
+        @blog = current_user.blogs.build(blog_params)
+        render :new if @blog.invalid?
     end
-
     private
     def blog_params
-      params.require(:blog).permit(:blog_image, :content, :image_cache, :user_id, :image, :blog_image_cash)                         
+      params.require(:blog).permit(:blog_image, :content, :blog_image_cache)                         
     end
 end
